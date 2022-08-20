@@ -12,5 +12,4 @@ COPY --from=build /app ./
 
 EXPOSE 5000
 
-ENV ASPNETCORE_URLS http://*:$PORT
 ENTRYPOINT ["dotnet", "MinimalAPI.dll"]
