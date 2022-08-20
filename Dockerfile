@@ -12,4 +12,4 @@ COPY --from=build /app ./
 
 EXPOSE 5000
 
-ENTRYPOINT ["dotnet", "MinimalAPI.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet MinimalAPI.dll
