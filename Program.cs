@@ -13,8 +13,9 @@ builder.Services.AddDbContext<UserLoginDb>(options => options.UseNpgsql(connecti
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 // Connect to PostgreSQL Database end
 
+builder.Services.AddHealthChecks(); // Healt Check For Docker
 var app = builder.Build();
-
+app.MapHealthChecks("/health");
 app.MapGet("/", () => "/users/{id:int} tamamlandý");
 
 //____________________________ UserLogin Crud Actions Start ______________________\\
@@ -68,9 +69,6 @@ app.MapPost("/users/books/", async (InternshipBook s, InternshipBookDb Sdb) =>
 });
 
 app.MapGet("/users/books", async (InternshipBookDb db) => await db.InternshipBook.ToListAsync());
-
-
-
 
 app.MapGet("/users/books/{BookId:int}", async (int BookId, InternshipBookDb db) => 
 {
